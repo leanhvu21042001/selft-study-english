@@ -1,3 +1,4 @@
+// Desc: Learn English With Gemini - v003
 // Dán mã này vào script.google.com rồi Deploy -> Web App (Execute as: Me, Who has access: Anyone)
 const ROOT_FOLDER_ID = '1zgWMKCy_xl893Il7rkRXyIC8YADUKx2q'; // Thư mục 'Hoc Tieng Anh 1 Nam'
 
@@ -72,6 +73,17 @@ function getRecordingLabel(key) {
   return 'Bản ghi chung';
 }
 
+function getRecordingUrls(file) {
+  let downloadUrl = 'https://drive.google.com/uc?export=download&id=' + file.getId();
+  try {
+    downloadUrl = file.getDownloadUrl() || downloadUrl;
+  } catch (e) {}
+  return {
+    url: downloadUrl,
+    driveUrl: file.getUrl()
+  };
+}
+
 function readFolderRecordings(dayFolder, day) {
   const recordings = [];
   const recordFolder = findRecordFolder(dayFolder);
@@ -81,6 +93,13 @@ function readFolderRecordings(dayFolder, day) {
     const file = files.next();
     if (!/\.webm$/i.test(file.getName())) continue;
     const nameParts = file.getName().split('__');
+    let publicAccess = true;
+    try {
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    } catch (e) {
+      publicAccess = false;
+    }
+    const urls = getRecordingUrls(file);
     recordings.push({
       day: day,
       dayFolder: dayFolder.getName(),
@@ -88,7 +107,9 @@ function readFolderRecordings(dayFolder, day) {
       key: nameParts.length > 1 ? nameParts[0].replace(/^day\d+_/, '') : 'general',
       label: getRecordingLabel(nameParts[0].replace(/^day\d+_/, '')),
       name: file.getName(),
-      url: 'https://drive.google.com/uc?export=download&id=' + file.getId()
+      url: urls.url,
+      driveUrl: urls.driveUrl,
+      publicAccess: publicAccess
     });
   }
   return recordings;
@@ -178,9 +199,13 @@ function doPost(e) {
     const bytes = Utilities.base64Decode(body.data);
     const blob = Utilities.newBlob(bytes, body.mimeType || 'audio/webm', body.fileName);
     const file = targetFolder.createFile(blob);
+    let publicAccess = true;
     try {
       file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-    } catch (sharingError) {}
+    } catch (sharingError) {
+      publicAccess = false;
+    }
+    const urls = getRecordingUrls(file);
     return jsonOutput({
       ok: true,
       day: body.day,
@@ -189,7 +214,9 @@ function doPost(e) {
       key: body.recordingKey || 'general',
       label: body.recordingLabel,
       name: file.getName(),
-      url: 'https://drive.google.com/uc?export=download&id=' + file.getId()
+      url: urls.url,
+      driveUrl: urls.driveUrl,
+      publicAccess: publicAccess
     });
   } catch (err) {
     return jsonOutput({ ok: false, error: err.message });

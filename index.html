@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Học Tiếng Anh 1 Năm (A0–A1) — Web Học Tập &amp; Thu Âm</title>
+  <title>Học Tiếng Anh 1 Năm (A0–B2) — Web Học Tập &amp; Thu Âm</title>
   <style>
     :root {
       --bg: #f4f7fb; --card: rgba(255,255,255,.92); --text: #14213d; --muted: #667085;
@@ -55,6 +55,7 @@
     .recording-slot .btn { padding: 7px 10px; }
     .recording-list { display: flex; flex-direction: column; gap: 8px; }
     .recording-list audio { width: min(420px, 100%); height: 34px; }
+    .loading-state { padding: 28px 12px; color: var(--muted); text-align: center; }
     h3 { margin-top: 4px; font-size: 19px; letter-spacing: -.02em; }
     h4 { margin-top: 24px; }
     code { color: var(--primary-dark); }
@@ -69,14 +70,15 @@
       .tab-btn { white-space: nowrap; }
       .toolbar > input[type="text"], .toolbar > select { width: 100%; }
       th, td { padding: 10px 7px; }
+      #vocabTableWrap table { min-width: 820px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <p class="eyebrow">Daily English • A0 — A1</p>
-      <h1 id="lessonTitle">Học Tiếng Anh 1 Năm (A0–A1)</h1>
+      <p class="eyebrow">Daily English • A0 — B2</p>
+      <h1 id="lessonTitle">Học Tiếng Anh 1 Năm (A0–B2)</h1>
       <p class="sub" id="progressSummary">Đang tải bài học...</p>
       <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
       <input id="daySearch" class="day-search" type="text" placeholder="Tìm ngày học, tiêu đề hoặc ngày tạo..." oninput="renderDayNav()" />
@@ -215,6 +217,10 @@
     let LESSONS = [];
     let DAY_INDEX = [];
     let driveMode = false;
+    let lessonRequestId = 0;
+    let progressSaveTimer = null;
+    let progressSaveInFlight = false;
+    let progressSavePending = false;
     let currentDayIdx = 0;
     let fcIndex = 0;
     let fcShowBack = false;
@@ -229,7 +235,8 @@
     function setLearned(day, wordId, val) {
       learnedMap[`${day}_${wordId}`] = val;
       updateSummary();
-      saveProgressToDrive();
+      clearTimeout(progressSaveTimer);
+      progressSaveTimer = setTimeout(saveProgressToDrive, 650);
     }
 
     function showTab(id, btn) {
@@ -302,6 +309,7 @@
     }
 
     async function selectDay(idx) {
+      const requestId = ++lessonRequestId;
       currentDayIdx = idx;
       fcIndex = 0;
       studyCardIndex = 0;
@@ -311,13 +319,17 @@
         const meta = DAY_INDEX[currentDayIdx];
         document.getElementById('lessonTitle').textContent = meta.title || `Ngày ${meta.day}`;
         document.getElementById('progressSummary').textContent = 'Đang tải bài học...';
-        document.getElementById('vocabBody').innerHTML = '<tr><td colspan="8">Đang tải bài học...</td></tr>';
+        document.getElementById('vocabBody').innerHTML = '<tr><td colspan="8"><div class="loading-state">Đang tải bài học...</div></td></tr>';
+        document.getElementById('dialogueBox').innerHTML = '<div class="loading-state">Đang tải hội thoại...</div>';
+        document.getElementById('essayBox').innerHTML = '<div class="loading-state">Đang tải bài văn...</div>';
         const savedUrl = localStorage.getItem('eng_gas_url') || '';
         const params = new URLSearchParams({ action: 'lesson', day: meta.day, folderName: meta.folderName || '' });
         const res = await fetch(savedUrl + (savedUrl.includes('?') ? '&' : '?') + params.toString());
         const data = await res.json();
+        if (requestId !== lessonRequestId) return;
         if (!data.ok || !data.lesson) {
           document.getElementById('gasStatus').textContent = data.error || 'Không tải được bài học.';
+          document.getElementById('vocabBody').innerHTML = '<tr><td colspan="8"><div class="loading-state err">Không tải được bài học.</div></td></tr>';
           return;
         }
         LESSONS[currentDayIdx] = data.lesson;
@@ -352,6 +364,11 @@
         document.getElementById('gasStatus').textContent = 'Hãy kết nối Google Drive để lưu tiến độ trên Drive.';
         return;
       }
+      if (progressSaveInFlight) {
+        progressSavePending = true;
+        return;
+      }
+      progressSaveInFlight = true;
       try {
         const res = await fetch(gasUrl, {
           method: 'POST',
@@ -362,6 +379,12 @@
         document.getElementById('gasStatus').textContent = 'Tiến độ đã được lưu lên Google Drive.';
       } catch (e) {
         document.getElementById('gasStatus').textContent = 'Không thể lưu tiến độ lên Google Drive: ' + e.message;
+      } finally {
+        progressSaveInFlight = false;
+        if (progressSavePending) {
+          progressSavePending = false;
+          saveProgressToDrive();
+        }
       }
     }
 
@@ -505,10 +528,11 @@
           item._label = label;
           (slot ? slot.querySelector('.recording-list') : document.getElementById('recordingsList')).prepend(item);
           if (slot) {
-            slot.querySelector('.recording-msg').textContent = 'Bản ghi sẵn sàng. Bấm lưu để tải lên Drive.';
+            slot.querySelector('.recording-msg').textContent = 'Đang tự động lưu bản ghi lên Drive...';
             setSlotRecordingState(slot, false);
           }
           stream.getTracks().forEach(t => t.stop());
+          uploadToDrive(item.querySelector('button.btn-primary'));
         };
         mediaRecorder.start();
         activeRecording = { key: key, label: label, slot: slot };
@@ -584,7 +608,14 @@
     function renderRecordingItem(record) {
       const item = document.createElement('div');
       item.className = 'rec-item';
-      item.innerHTML = `<strong>${record.label || record.name}</strong><audio controls src="${record.url}"></audio><span class="sub ok">Đã lưu trên Google Drive · ${record.folder || 'record'}</span>`;
+      const accessMessage = record.publicAccess === false
+        ? '<span class="sub err">Drive chưa cấp quyền phát trực tiếp. Hãy mở file bằng nút bên dưới.</span>'
+        : '<span class="sub ok">Đã lưu trên Google Drive · record</span>';
+      item.innerHTML = `<strong>${record.label || record.name}</strong><audio controls preload="metadata" src="${record.url}"></audio><a class="btn" href="${record.driveUrl || record.url}" target="_blank" rel="noopener">Mở file trên Drive</a>${accessMessage}`;
+      item.querySelector('audio').addEventListener('error', () => {
+        item.querySelector('.sub').textContent = 'Không phát trực tiếp được. Hãy bấm "Mở file trên Drive".';
+        item.querySelector('.sub').className = 'sub err';
+      });
       return item;
     }
     function renderContextRecordings() {
@@ -640,6 +671,8 @@
     function copyQuizReport() {
       navigator.clipboard.writeText(buildQuizReport()).then(() => {
         document.getElementById('quizStatus').textContent = 'Đã sao chép kết quả bài làm.';
+      }).catch(() => {
+        document.getElementById('quizStatus').textContent = 'Không thể sao chép tự động. Hãy kiểm tra quyền clipboard của trình duyệt.';
       });
     }
     function downloadQuizReport() {

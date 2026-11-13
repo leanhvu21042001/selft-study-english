@@ -15,3 +15,5 @@
 4. Từ đó, web sẽ tự động nạp các ngày học mới từ Google Drive và nút **Lưu lên Google Drive** trong tab Ghi âm sẽ đẩy file `.webm` vào đúng thư mục `Ngay XX`.
 
 Web App cũng lưu `progress.json` ở thư mục gốc để đồng bộ trạng thái từ đã thuộc. Trang chỉ tải danh sách ngày lúc mở; khi bấm một ngày, nó mới tải `lesson.json` và bản ghi của đúng folder ngày đó. Các file `.webm` sẽ được lưu vào folder `record` bên trong folder bài học ngày và được phân loại theo đoạn hội thoại/bài văn; nếu `record` chưa tồn tại, hệ thống sẽ tự tạo nó. Hệ thống không tự tạo folder bài học ngày. Sau khi thay đổi `apps_script_Code.gs`, cần tạo deployment mới hoặc cập nhật deployment hiện tại để API `bootstrap`, `lesson`, lưu tiến độ và danh sách bản ghi hoạt động.
+
+Sau khi dừng ghi âm, web sẽ tự động upload lên Drive nếu đã kết nối Apps Script. Nếu upload lỗi, nút lưu thủ công vẫn còn để thử lại.
