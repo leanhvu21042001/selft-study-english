@@ -1,0 +1,996 @@
+[
+  {
+    "day": 1,
+    "folderName": "Ngay 01 - 12-11-2026",
+    "title": "Ngày 1 (12-11-2026) — Nền tảng giao tiếp & sinh hoạt (A0–A1)",
+    "groups": [
+      "1: Giao tiếp cơ bản",
+      "2: Sinh hoạt & thời gian",
+      "3: Nhà cửa & mua sắm",
+      "4: Di chuyển & công việc"
+    ],
+    "words": [
+      {
+        "id": 1,
+        "word": "hello",
+        "ipa": "/həˈləʊ/",
+        "pos": "interj",
+        "vi": "xin chào",
+        "ex": "Hello, nice to meet you.",
+        "group": 1
+      },
+      {
+        "id": 2,
+        "word": "name",
+        "ipa": "/neɪm/",
+        "pos": "n",
+        "vi": "tên",
+        "ex": "My name is Minh.",
+        "group": 1
+      },
+      {
+        "id": 3,
+        "word": "friend",
+        "ipa": "/frend/",
+        "pos": "n",
+        "vi": "bạn bè",
+        "ex": "She is my friend.",
+        "group": 1
+      },
+      {
+        "id": 4,
+        "word": "person",
+        "ipa": "/ˈpɜːsn/",
+        "pos": "n",
+        "vi": "người",
+        "ex": "He is a kind person.",
+        "group": 1
+      },
+      {
+        "id": 5,
+        "word": "family",
+        "ipa": "/ˈfæməli/",
+        "pos": "n",
+        "vi": "gia đình",
+        "ex": "I love my family.",
+        "group": 1
+      },
+      {
+        "id": 6,
+        "word": "man",
+        "ipa": "/mæn/",
+        "pos": "n",
+        "vi": "đàn ông",
+        "ex": "That man is my teacher.",
+        "group": 1
+      },
+      {
+        "id": 7,
+        "word": "woman",
+        "ipa": "/ˈwʊmən/",
+        "pos": "n",
+        "vi": "phụ nữ",
+        "ex": "This woman works here.",
+        "group": 1
+      },
+      {
+        "id": 8,
+        "word": "child",
+        "ipa": "/tʃaɪld/",
+        "pos": "n",
+        "vi": "trẻ em",
+        "ex": "The child is happy.",
+        "group": 1
+      },
+      {
+        "id": 9,
+        "word": "speak",
+        "ipa": "/spiːk/",
+        "pos": "v",
+        "vi": "nói (ngôn ngữ)",
+        "ex": "I speak a little English.",
+        "group": 1
+      },
+      {
+        "id": 10,
+        "word": "understand",
+        "ipa": "/ˌʌndəˈstænd/",
+        "pos": "v",
+        "vi": "hiểu",
+        "ex": "I understand you now.",
+        "group": 1
+      },
+      {
+        "id": 11,
+        "word": "ask",
+        "ipa": "/ɑːsk/",
+        "pos": "v",
+        "vi": "hỏi",
+        "ex": "Can I ask a question?",
+        "group": 1
+      },
+      {
+        "id": 12,
+        "word": "answer",
+        "ipa": "/ˈɑːnsə/",
+        "pos": "v/n",
+        "vi": "trả lời / câu trả lời",
+        "ex": "Please answer me.",
+        "group": 1
+      },
+      {
+        "id": 13,
+        "word": "help",
+        "ipa": "/help/",
+        "pos": "v/n",
+        "vi": "giúp đỡ",
+        "ex": "Can you help me?",
+        "group": 1
+      },
+      {
+        "id": 14,
+        "word": "need",
+        "ipa": "/niːd/",
+        "pos": "v",
+        "vi": "cần",
+        "ex": "I need some water.",
+        "group": 1
+      },
+      {
+        "id": 15,
+        "word": "want",
+        "ipa": "/wɒnt/",
+        "pos": "v",
+        "vi": "muốn",
+        "ex": "I want to learn English.",
+        "group": 1
+      },
+      {
+        "id": 16,
+        "word": "like",
+        "ipa": "/laɪk/",
+        "pos": "v",
+        "vi": "thích",
+        "ex": "I like coffee.",
+        "group": 1
+      },
+      {
+        "id": 17,
+        "word": "know",
+        "ipa": "/nəʊ/",
+        "pos": "v",
+        "vi": "biết",
+        "ex": "I know this place.",
+        "group": 1
+      },
+      {
+        "id": 18,
+        "word": "thank",
+        "ipa": "/θæŋk/",
+        "pos": "v",
+        "vi": "cảm ơn",
+        "ex": "Thank you very much.",
+        "group": 1
+      },
+      {
+        "id": 19,
+        "word": "sorry",
+        "ipa": "/ˈsɒri/",
+        "pos": "adj",
+        "vi": "xin lỗi, tiếc",
+        "ex": "Sorry, I am late.",
+        "group": 1
+      },
+      {
+        "id": 20,
+        "word": "please",
+        "ipa": "/pliːz/",
+        "pos": "adv",
+        "vi": "làm ơn",
+        "ex": "Sit down, please.",
+        "group": 1
+      },
+      {
+        "id": 21,
+        "word": "yes",
+        "ipa": "/jes/",
+        "pos": "adv",
+        "vi": "vâng, có",
+        "ex": "Yes, I am ready.",
+        "group": 1
+      },
+      {
+        "id": 22,
+        "word": "no",
+        "ipa": "/nəʊ/",
+        "pos": "adv",
+        "vi": "không",
+        "ex": "No, thank you.",
+        "group": 1
+      },
+      {
+        "id": 23,
+        "word": "good",
+        "ipa": "/ɡʊd/",
+        "pos": "adj",
+        "vi": "tốt, ngon",
+        "ex": "Today is a good day.",
+        "group": 1
+      },
+      {
+        "id": 24,
+        "word": "new",
+        "ipa": "/njuː/",
+        "pos": "adj",
+        "vi": "mới",
+        "ex": "I have a new book.",
+        "group": 1
+      },
+      {
+        "id": 25,
+        "word": "nice",
+        "ipa": "/naɪs/",
+        "pos": "adj",
+        "vi": "dễ chịu, đẹp",
+        "ex": "It is nice here.",
+        "group": 1
+      },
+      {
+        "id": 26,
+        "word": "day",
+        "ipa": "/deɪ/",
+        "pos": "n",
+        "vi": "ngày",
+        "ex": "Have a nice day.",
+        "group": 2
+      },
+      {
+        "id": 27,
+        "word": "morning",
+        "ipa": "/ˈmɔːnɪŋ/",
+        "pos": "n",
+        "vi": "buổi sáng",
+        "ex": "Good morning, everyone.",
+        "group": 2
+      },
+      {
+        "id": 28,
+        "word": "afternoon",
+        "ipa": "/ˌɑːftəˈnuːn/",
+        "pos": "n",
+        "vi": "buổi chiều",
+        "ex": "See you this afternoon.",
+        "group": 2
+      },
+      {
+        "id": 29,
+        "word": "evening",
+        "ipa": "/ˈiːvnɪŋ/",
+        "pos": "n",
+        "vi": "buổi tối",
+        "ex": "We study in the evening.",
+        "group": 2
+      },
+      {
+        "id": 30,
+        "word": "night",
+        "ipa": "/naɪt/",
+        "pos": "n",
+        "vi": "ban đêm",
+        "ex": "Good night!",
+        "group": 2
+      },
+      {
+        "id": 31,
+        "word": "today",
+        "ipa": "/təˈdeɪ/",
+        "pos": "adv/n",
+        "vi": "hôm nay",
+        "ex": "Today is Monday.",
+        "group": 2
+      },
+      {
+        "id": 32,
+        "word": "tomorrow",
+        "ipa": "/təˈmɒrəʊ/",
+        "pos": "adv/n",
+        "vi": "ngày mai",
+        "ex": "I leave tomorrow.",
+        "group": 2
+      },
+      {
+        "id": 33,
+        "word": "time",
+        "ipa": "/taɪm/",
+        "pos": "n",
+        "vi": "thời gian, giờ",
+        "ex": "What time is it?",
+        "group": 2
+      },
+      {
+        "id": 34,
+        "word": "hour",
+        "ipa": "/ˈaʊə/",
+        "pos": "n",
+        "vi": "giờ đồng hồ",
+        "ex": "Wait one hour.",
+        "group": 2
+      },
+      {
+        "id": 35,
+        "word": "wake",
+        "ipa": "/weɪk/",
+        "pos": "v",
+        "vi": "thức dậy",
+        "ex": "I wake up at six.",
+        "group": 2
+      },
+      {
+        "id": 36,
+        "word": "sleep",
+        "ipa": "/sliːp/",
+        "pos": "v/n",
+        "vi": "ngủ / giấc ngủ",
+        "ex": "I sleep early.",
+        "group": 2
+      },
+      {
+        "id": 37,
+        "word": "eat",
+        "ipa": "/iːt/",
+        "pos": "v",
+        "vi": "ăn",
+        "ex": "We eat lunch together.",
+        "group": 2
+      },
+      {
+        "id": 38,
+        "word": "drink",
+        "ipa": "/drɪŋk/",
+        "pos": "v",
+        "vi": "uống",
+        "ex": "Drink more water.",
+        "group": 2
+      },
+      {
+        "id": 39,
+        "word": "wash",
+        "ipa": "/wɒʃ/",
+        "pos": "v",
+        "vi": "rửa, giặt",
+        "ex": "Wash your hands.",
+        "group": 2
+      },
+      {
+        "id": 40,
+        "word": "clean",
+        "ipa": "/kliːn/",
+        "pos": "v/adj",
+        "vi": "dọn dẹp / sạch sẽ",
+        "ex": "My room is clean.",
+        "group": 2
+      },
+      {
+        "id": 41,
+        "word": "cook",
+        "ipa": "/kʊk/",
+        "pos": "v",
+        "vi": "nấu ăn",
+        "ex": "I cook dinner at home.",
+        "group": 2
+      },
+      {
+        "id": 42,
+        "word": "read",
+        "ipa": "/riːd/",
+        "pos": "v",
+        "vi": "đọc",
+        "ex": "I read every night.",
+        "group": 2
+      },
+      {
+        "id": 43,
+        "word": "write",
+        "ipa": "/raɪt/",
+        "pos": "v",
+        "vi": "viết",
+        "ex": "Write your name here.",
+        "group": 2
+      },
+      {
+        "id": 44,
+        "word": "listen",
+        "ipa": "/ˈlɪsn/",
+        "pos": "v",
+        "vi": "nghe",
+        "ex": "Listen to the audio.",
+        "group": 2
+      },
+      {
+        "id": 45,
+        "word": "watch",
+        "ipa": "/wɒtʃ/",
+        "pos": "v",
+        "vi": "xem",
+        "ex": "I watch the news.",
+        "group": 2
+      },
+      {
+        "id": 46,
+        "word": "learn",
+        "ipa": "/lɜːn/",
+        "pos": "v",
+        "vi": "học",
+        "ex": "I learn new words daily.",
+        "group": 2
+      },
+      {
+        "id": 47,
+        "word": "study",
+        "ipa": "/ˈstʌdi/",
+        "pos": "v",
+        "vi": "học tập, nghiên cứu",
+        "ex": "She studies hard.",
+        "group": 2
+      },
+      {
+        "id": 48,
+        "word": "live",
+        "ipa": "/lɪv/",
+        "pos": "v",
+        "vi": "sống",
+        "ex": "I live in Vietnam.",
+        "group": 2
+      },
+      {
+        "id": 49,
+        "word": "early",
+        "ipa": "/ˈɜːli/",
+        "pos": "adj/adv",
+        "vi": "sớm",
+        "ex": "I arrive early.",
+        "group": 2
+      },
+      {
+        "id": 50,
+        "word": "late",
+        "ipa": "/leɪt/",
+        "pos": "adj/adv",
+        "vi": "muộn",
+        "ex": "Do not be late.",
+        "group": 2
+      },
+      {
+        "id": 51,
+        "word": "home",
+        "ipa": "/həʊm/",
+        "pos": "n",
+        "vi": "nhà, tổ ấm",
+        "ex": "I am at home.",
+        "group": 3
+      },
+      {
+        "id": 52,
+        "word": "house",
+        "ipa": "/haʊs/",
+        "pos": "n",
+        "vi": "ngôi nhà",
+        "ex": "Their house is big.",
+        "group": 3
+      },
+      {
+        "id": 53,
+        "word": "room",
+        "ipa": "/ruːm/",
+        "pos": "n",
+        "vi": "căn phòng",
+        "ex": "This room is quiet.",
+        "group": 3
+      },
+      {
+        "id": 54,
+        "word": "bed",
+        "ipa": "/bed/",
+        "pos": "n",
+        "vi": "cái giường",
+        "ex": "The bed is soft.",
+        "group": 3
+      },
+      {
+        "id": 55,
+        "word": "table",
+        "ipa": "/ˈteɪbl/",
+        "pos": "n",
+        "vi": "cái bàn",
+        "ex": "Put it on the table.",
+        "group": 3
+      },
+      {
+        "id": 56,
+        "word": "chair",
+        "ipa": "/tʃeə/",
+        "pos": "n",
+        "vi": "cái ghế",
+        "ex": "Take a chair.",
+        "group": 3
+      },
+      {
+        "id": 57,
+        "word": "door",
+        "ipa": "/dɔː/",
+        "pos": "n",
+        "vi": "cánh cửa",
+        "ex": "Close the door, please.",
+        "group": 3
+      },
+      {
+        "id": 58,
+        "word": "window",
+        "ipa": "/ˈwɪndəʊ/",
+        "pos": "n",
+        "vi": "cửa sổ",
+        "ex": "Open the window.",
+        "group": 3
+      },
+      {
+        "id": 59,
+        "word": "food",
+        "ipa": "/fuːd/",
+        "pos": "n",
+        "vi": "thức ăn",
+        "ex": "The food is delicious.",
+        "group": 3
+      },
+      {
+        "id": 60,
+        "word": "water",
+        "ipa": "/ˈwɔːtə/",
+        "pos": "n",
+        "vi": "nước",
+        "ex": "A glass of water, please.",
+        "group": 3
+      },
+      {
+        "id": 61,
+        "word": "bread",
+        "ipa": "/bred/",
+        "pos": "n",
+        "vi": "bánh mì",
+        "ex": "I eat bread for breakfast.",
+        "group": 3
+      },
+      {
+        "id": 62,
+        "word": "rice",
+        "ipa": "/raɪs/",
+        "pos": "n",
+        "vi": "cơm, gạo",
+        "ex": "We eat rice every day.",
+        "group": 3
+      },
+      {
+        "id": 63,
+        "word": "coffee",
+        "ipa": "/ˈkɒfi/",
+        "pos": "n",
+        "vi": "cà phê",
+        "ex": "One black coffee, please.",
+        "group": 3
+      },
+      {
+        "id": 64,
+        "word": "tea",
+        "ipa": "/tiː/",
+        "pos": "n",
+        "vi": "trà",
+        "ex": "Do you like green tea?",
+        "group": 3
+      },
+      {
+        "id": 65,
+        "word": "shop",
+        "ipa": "/ʃɒp/",
+        "pos": "n/v",
+        "vi": "cửa hàng / mua sắm",
+        "ex": "The shop opens at eight.",
+        "group": 3
+      },
+      {
+        "id": 66,
+        "word": "buy",
+        "ipa": "/baɪ/",
+        "pos": "v",
+        "vi": "mua",
+        "ex": "I want to buy fruit.",
+        "group": 3
+      },
+      {
+        "id": 67,
+        "word": "pay",
+        "ipa": "/peɪ/",
+        "pos": "v",
+        "vi": "trả tiền",
+        "ex": "Can I pay by card?",
+        "group": 3
+      },
+      {
+        "id": 68,
+        "word": "money",
+        "ipa": "/ˈmʌni/",
+        "pos": "n",
+        "vi": "tiền",
+        "ex": "I have enough money.",
+        "group": 3
+      },
+      {
+        "id": 69,
+        "word": "price",
+        "ipa": "/praɪs/",
+        "pos": "n",
+        "vi": "giá cả",
+        "ex": "What is the price?",
+        "group": 3
+      },
+      {
+        "id": 70,
+        "word": "cheap",
+        "ipa": "/tʃiːp/",
+        "pos": "adj",
+        "vi": "rẻ",
+        "ex": "This shirt is cheap.",
+        "group": 3
+      },
+      {
+        "id": 71,
+        "word": "expensive",
+        "ipa": "/ɪkˈspensɪv/",
+        "pos": "adj",
+        "vi": "đắt",
+        "ex": "That bag is expensive.",
+        "group": 3
+      },
+      {
+        "id": 72,
+        "word": "big",
+        "ipa": "/bɪɡ/",
+        "pos": "adj",
+        "vi": "to, lớn",
+        "ex": "It is a big city.",
+        "group": 3
+      },
+      {
+        "id": 73,
+        "word": "small",
+        "ipa": "/smɔːl/",
+        "pos": "adj",
+        "vi": "nhỏ",
+        "ex": "I have a small bag.",
+        "group": 3
+      },
+      {
+        "id": 74,
+        "word": "hot",
+        "ipa": "/hɒt/",
+        "pos": "adj",
+        "vi": "nóng",
+        "ex": "The tea is hot.",
+        "group": 3
+      },
+      {
+        "id": 75,
+        "word": "cold",
+        "ipa": "/kəʊld/",
+        "pos": "adj",
+        "vi": "lạnh",
+        "ex": "I like cold water.",
+        "group": 3
+      },
+      {
+        "id": 76,
+        "word": "go",
+        "ipa": "/ɡəʊ/",
+        "pos": "v",
+        "vi": "đi",
+        "ex": "I go to work by bus.",
+        "group": 4
+      },
+      {
+        "id": 77,
+        "word": "come",
+        "ipa": "/kʌm/",
+        "pos": "v",
+        "vi": "đến",
+        "ex": "Come here, please.",
+        "group": 4
+      },
+      {
+        "id": 78,
+        "word": "walk",
+        "ipa": "/wɔːk/",
+        "pos": "v",
+        "vi": "đi bộ",
+        "ex": "I walk to the station.",
+        "group": 4
+      },
+      {
+        "id": 79,
+        "word": "run",
+        "ipa": "/rʌn/",
+        "pos": "v",
+        "vi": "chạy",
+        "ex": "Do not run inside.",
+        "group": 4
+      },
+      {
+        "id": 80,
+        "word": "wait",
+        "ipa": "/weɪt/",
+        "pos": "v",
+        "vi": "chờ đợi",
+        "ex": "Wait for me!",
+        "group": 4
+      },
+      {
+        "id": 81,
+        "word": "stop",
+        "ipa": "/stɒp/",
+        "pos": "v/n",
+        "vi": "dừng lại / trạm dừng",
+        "ex": "Stop at the red light.",
+        "group": 4
+      },
+      {
+        "id": 82,
+        "word": "open",
+        "ipa": "/ˈəʊpən/",
+        "pos": "v/adj",
+        "vi": "mở / đang mở",
+        "ex": "The bank is open now.",
+        "group": 4
+      },
+      {
+        "id": 83,
+        "word": "close",
+        "ipa": "/kləʊz/",
+        "pos": "v",
+        "vi": "đóng",
+        "ex": "They close at five.",
+        "group": 4
+      },
+      {
+        "id": 84,
+        "word": "street",
+        "ipa": "/striːt/",
+        "pos": "n",
+        "vi": "đường phố",
+        "ex": "Cross the street carefully.",
+        "group": 4
+      },
+      {
+        "id": 85,
+        "word": "city",
+        "ipa": "/ˈsɪti/",
+        "pos": "n",
+        "vi": "thành phố",
+        "ex": "This city is very busy.",
+        "group": 4
+      },
+      {
+        "id": 86,
+        "word": "country",
+        "ipa": "/ˈkʌntri/",
+        "pos": "n",
+        "vi": "quốc gia, đất nước",
+        "ex": "I want to visit a new country.",
+        "group": 4
+      },
+      {
+        "id": 87,
+        "word": "station",
+        "ipa": "/ˈsteɪʃn/",
+        "pos": "n",
+        "vi": "nhà ga, trạm",
+        "ex": "Where is the train station?",
+        "group": 4
+      },
+      {
+        "id": 88,
+        "word": "bus",
+        "ipa": "/bʌs/",
+        "pos": "n",
+        "vi": "xe buýt",
+        "ex": "Take bus number ten.",
+        "group": 4
+      },
+      {
+        "id": 89,
+        "word": "train",
+        "ipa": "/treɪn/",
+        "pos": "n",
+        "vi": "tàu hỏa",
+        "ex": "The train is fast.",
+        "group": 4
+      },
+      {
+        "id": 90,
+        "word": "ticket",
+        "ipa": "/ˈtɪkɪt/",
+        "pos": "n",
+        "vi": "vé",
+        "ex": "I need one ticket.",
+        "group": 4
+      },
+      {
+        "id": 91,
+        "word": "map",
+        "ipa": "/mæp/",
+        "pos": "n",
+        "vi": "bản đồ",
+        "ex": "Look at the map.",
+        "group": 4
+      },
+      {
+        "id": 92,
+        "word": "work",
+        "ipa": "/wɜːk/",
+        "pos": "v/n",
+        "vi": "làm việc / công việc",
+        "ex": "I work in an office.",
+        "group": 4
+      },
+      {
+        "id": 93,
+        "word": "job",
+        "ipa": "/dʒɒb/",
+        "pos": "n",
+        "vi": "nghề nghiệp, việc làm",
+        "ex": "He has a good job.",
+        "group": 4
+      },
+      {
+        "id": 94,
+        "word": "office",
+        "ipa": "/ˈɒfɪs/",
+        "pos": "n",
+        "vi": "văn phòng",
+        "ex": "My office is near here.",
+        "group": 4
+      },
+      {
+        "id": 95,
+        "word": "book",
+        "ipa": "/bʊk/",
+        "pos": "n",
+        "vi": "quyển sách",
+        "ex": "Read this book first.",
+        "group": 4
+      },
+      {
+        "id": 96,
+        "word": "paper",
+        "ipa": "/ˈpeɪpə/",
+        "pos": "n",
+        "vi": "giấy, tài liệu",
+        "ex": "Sign on this paper.",
+        "group": 4
+      },
+      {
+        "id": 97,
+        "word": "phone",
+        "ipa": "/fəʊn/",
+        "pos": "n",
+        "vi": "điện thoại",
+        "ex": "Where is my phone?",
+        "group": 4
+      },
+      {
+        "id": 98,
+        "word": "bag",
+        "ipa": "/bæɡ/",
+        "pos": "n",
+        "vi": "túi, cặp sách",
+        "ex": "Put it in your bag.",
+        "group": 4
+      },
+      {
+        "id": 99,
+        "word": "near",
+        "ipa": "/nɪə/",
+        "pos": "prep/adj",
+        "vi": "gần",
+        "ex": "The shop is near my house.",
+        "group": 4
+      },
+      {
+        "id": 100,
+        "word": "far",
+        "ipa": "/fɑː/",
+        "pos": "adj/adv",
+        "vi": "xa",
+        "ex": "Is the station far?",
+        "group": 4
+      }
+    ],
+    "dialogue": [
+      {
+        "speaker": "Lan",
+        "en": "Hello! Sorry, can you help me? I need to go to the train station.",
+        "vi": "Xin chào! Xin lỗi, bạn giúp tôi được không? Tôi cần đi đến ga tàu."
+      },
+      {
+        "speaker": "Tom",
+        "en": "Sure! Look at this map. It is not far from here. You can walk down this street or take a bus.",
+        "vi": "Chắc chắn rồi! Hãy nhìn bản đồ này. Nó không xa đây đâu. Bạn có thể đi bộ dọc con phố này hoặc bắt xe buýt."
+      },
+      {
+        "speaker": "Lan",
+        "en": "Thank you! Is the ticket expensive?",
+        "vi": "Cảm ơn bạn! Vé có đắt không?"
+      },
+      {
+        "speaker": "Tom",
+        "en": "No, it is cheap. The office is open now, so you can buy it and pay with money or a card.",
+        "vi": "Không, nó rẻ thôi. Quầy vé đang mở, nên bạn có thể mua và trả bằng tiền mặt hoặc thẻ."
+      },
+      {
+        "speaker": "Lan",
+        "en": "Good! I understand now. Have a nice day!",
+        "vi": "Tốt quá! Bây giờ tôi hiểu rồi. Chúc bạn một ngày tốt lành!"
+      }
+    ],
+    "essay": {
+      "title": "My New Day in a Big City",
+      "paragraphs": [
+        {
+          "en": "I wake up early every morning at six. First, I wash my face and clean my small room. I live in a nice house near the city center. After that, I eat bread and drink hot coffee at the table. I want to learn English well, so I read a new book and write down words on paper for one hour.",
+          "vi": "Tôi thức dậy sớm mỗi sáng lúc 6 giờ. Đầu tiên, tôi rửa mặt và dọn căn phòng nhỏ của mình. Tôi sống trong một ngôi nhà dễ chịu gần trung tâm thành phố. Sau đó, tôi ăn bánh mì và uống cà phê nóng tại bàn. Tôi muốn học tiếng Anh thật tốt, nên tôi đọc một cuốn sách mới và viết từ vựng ra giấy trong một tiếng."
+        },
+        {
+          "en": "At eight, I put my phone and map in my bag, close the door, and walk to the bus station. My office is not far, and I like my job. At work, I speak with my friend and ask questions when I do not understand. In the afternoon, I stop at a shop to buy food and tea. The price is cheap, so I pay quickly and go home. In the evening, I cook rice, listen to English, and sleep early for a good tomorrow.",
+          "vi": "Lúc 8 giờ, tôi bỏ điện thoại và bản đồ vào túi, đóng cửa lại rồi đi bộ ra trạm xe buýt. Văn phòng của tôi không xa, và tôi thích công việc của mình. Ở chỗ làm, tôi nói chuyện với bạn và hỏi khi tôi không hiểu. Vào buổi chiều, tôi ghé một cửa hàng để mua đồ ăn và trà. Giá cả rất rẻ, nên tôi trả tiền nhanh rồi về nhà. Vào buổi tối, tôi nấu cơm, nghe tiếng Anh và ngủ sớm để có một ngày mai tốt đẹp."
+        }
+      ],
+      "grammar": [
+        "Hiện tại đơn cho thói quen hàng ngày: I wake up, I eat, I work (phủ định: do not + V).",
+        "Cấu trúc want to / need to + V: diễn tả mong muốn hoặc nhu cầu (I want to learn English).",
+        "Giới từ thời gian & nơi chốn: in the evening/afternoon, at six/work/the table, near / far from."
+      ]
+    },
+    "quiz": [
+      {
+        "prompt": "Điền từ: \"I _____ (muốn) to _____ (mua) a _____ (mới) book.\"",
+        "answers": [
+          "want buy new"
+        ]
+      },
+      {
+        "prompt": "Điền giới từ (at / in / on): \"I study English _____ the evening.\"",
+        "answers": [
+          "in"
+        ]
+      },
+      {
+        "prompt": "Từ trái nghĩa với \"expensive\" là gì?",
+        "answers": [
+          "cheap"
+        ]
+      },
+      {
+        "prompt": "Dịch sang tiếng Anh: \"Cửa hàng ở gần nhà tôi.\"",
+        "answers": [
+          "the shop is near my house",
+          "the shop is near my home"
+        ]
+      },
+      {
+        "prompt": "Dịch sang tiếng Anh: \"Làm ơn mở cửa sổ ra.\"",
+        "answers": [
+          "open the window, please",
+          "open the window please",
+          "please open the window"
+        ]
+      }
+    ],
+    "createdDate": "12-11-2026"
+  }
+]
