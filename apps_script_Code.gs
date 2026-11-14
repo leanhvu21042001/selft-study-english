@@ -55,6 +55,20 @@ function findLessonFolder(root, day, folderName) {
   return null;
 }
 
+function findLessonDocumentUrl(dayFolder) {
+  if (!dayFolder) return '';
+  const files = dayFolder.getFiles();
+  let fallback = '';
+  while (files.hasNext()) {
+    const file = files.next();
+    if (file.getName() === 'lesson.json') continue;
+    if (!/\.docx?$/i.test(file.getName())) continue;
+    if (/\.docx$/i.test(file.getName())) return file.getUrl();
+    fallback = file.getUrl();
+  }
+  return fallback;
+}
+
 function findRecordFolder(dayFolder) {
   if (!dayFolder) return null;
   const folders = dayFolder.getFolders();
@@ -121,7 +135,11 @@ function readLesson(root, day, folderName) {
   const files = folder.getFilesByName('lesson.json');
   if (!files.hasNext()) return null;
   const lesson = JSON.parse(files.next().getBlob().getDataAsString('UTF-8'));
-  return { lesson: lesson, recordings: readFolderRecordings(folder, lesson.day) };
+  return {
+    lesson: lesson,
+    recordings: readFolderRecordings(folder, lesson.day),
+    documentUrl: findLessonDocumentUrl(folder)
+  };
 }
 
 function readProgress(root) {
@@ -168,7 +186,12 @@ function doGet(e) {
   if (action === 'lesson') {
     const result = readLesson(root, e.parameter.day, e.parameter.folderName);
     if (!result) return jsonOutput({ ok: false, error: 'Không tìm thấy bài học hoặc folder ngày.' });
-    return jsonOutput({ ok: true, lesson: result.lesson, recordings: result.recordings });
+    return jsonOutput({
+      ok: true,
+      lesson: result.lesson,
+      recordings: result.recordings,
+      documentUrl: result.documentUrl
+    });
   }
   return jsonOutput(readLessons(root));
 }

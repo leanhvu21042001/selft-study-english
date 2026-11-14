@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý học tập</title>
+  <link rel="stylesheet" href="public/styles/dashboard.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Quản lý học tập</h1>
+      <p class="sub">Theo dõi tiến độ và cấu hình kết nối Google Drive.</p>
+    </header>
+
+    <nav class="nav" aria-label="Điều hướng">
+      <a href="index.html">Trang học</a>
+      <button class="active" type="button" onclick="showPanel('stats', this)">Thống kê</button>
+      <button id="driveNav" type="button" onclick="showPanel('drive', this)">Kết nối Drive</button>
+    </nav>
+
+    <section id="stats" class="panel active">
+      <div class="card">
+        <div class="toolbar">
+          <h2 style="margin:0 auto 0 0;">Thống kê học tập</h2>
+          <button class="btn" type="button" onclick="loadData()">Làm mới</button>
+        </div>
+        <p id="statsStatus" class="sub">Đang tải dữ liệu...</p>
+        <div class="stats-grid">
+          <div class="stat">Tổng số bài<strong id="totalLessons">0</strong></div>
+          <div class="stat">Đã bắt đầu<strong id="startedLessons">0</strong></div>
+          <div class="stat">Đã hoàn thành<strong id="completedLessons">0</strong></div>
+          <div class="stat">Từ đã học<strong id="learnedWords">0/0</strong></div>
+        </div>
+        <div class="columns">
+          <div>
+            <h3>Đã học / đang học</h3>
+            <ul id="learnedList"></ul>
+          </div>
+          <div>
+            <h3>Chưa học</h3>
+            <ul id="unlearnedList"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="drive" class="panel">
+      <div class="card">
+        <h2>Kết nối Google Drive</h2>
+        <p class="sub">URL này được dùng chung với trang học để tải bài, đồng bộ tiến độ và lưu bản ghi âm.</p>
+        <div class="toolbar">
+          <input id="gasUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" />
+          <button class="btn btn-primary" type="button" onclick="saveGasUrl()">Lưu kết nối</button>
+        </div>
+        <p id="driveStatus" class="sub"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="public/scripts/config.js"></script>
+  <script src="public/scripts/utils.js"></script>
+  <script src="public/scripts/dashboard.js"></script>
+</body>
+</html>
+
