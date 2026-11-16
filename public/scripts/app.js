@@ -3,6 +3,7 @@ let LESSONS = [];
 let DAY_INDEX = [];
 let driveMode = false;
 let lessonRequestId = 0;
+let lessonController = null;
 let progressSaveTimer = null;
 let progressSaveInFlight = false;
 let progressSavePending = false;
@@ -14,11 +15,13 @@ let fcIndex = 0;
 let fcShowBack = false;
 let studyCardIndex = 0;
 let studyCardShowBack = false;
+let collapsedVocabGroups = new Set();
 let learnedMap = {};
 let lessonProgress = {};
 let driveRecordings = [];
 let mediaRecorder = null, recChunks = [], recTimerInt = null, recSeconds = 0;
 let activeRecording = null;
+const lessonDateCache = new WeakMap();
 
 function showTab(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -133,11 +136,15 @@ function renderDayNav() {
 }
 
 function getLessonDate(lesson) {
+  const cached = lessonDateCache.get(lesson);
+  if (cached) return cached;
   const raw = lesson.createdDate || lesson.folderName || '';
   const match = String(raw).match(/(\d{1,2})[-/](\d{1,2})[-/](\d{4})/);
-  return match
+  const date = match
     ? { year: Number(match[3]), month: Number(match[2]), day: Number(match[1]) }
     : { year: 0, month: 0, day: 0 };
+  lessonDateCache.set(lesson, date);
+  return date;
 }
 
 function getWeekNumber(date) {
@@ -186,6 +193,8 @@ function toggleAllDayFolders() {
 
 async function selectDay(idx) {
   const requestId = ++lessonRequestId;
+  if (lessonController) lessonController.abort();
+  lessonController = null;
   currentDayIdx = idx;
   const selectedDay = DAY_INDEX[idx] || LESSONS[idx];
   if (selectedDay) {
@@ -207,7 +216,20 @@ async function selectDay(idx) {
     document.getElementById('essayBox').innerHTML = '<div class="loading-state">Đang tải bài văn...</div>';
     const savedUrl = getGasUrl();
     const params = new URLSearchParams({ action: 'lesson', day: meta.day, folderName: meta.folderName || '' });
-    const res = await fetch(savedUrl + (savedUrl.includes('?') ? '&' : '?') + params.toString() + '&token=' + encodeURIComponent(getAuthToken()));
+    const controller = new AbortController();
+    lessonController = controller;
+    let res;
+    try {
+      res = await fetch(savedUrl + (savedUrl.includes('?') ? '&' : '?') + params.toString() + '&token=' + encodeURIComponent(getAuthToken()), {
+        signal: controller.signal
+      });
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+      setGasStatus('Không tải được bài học: ' + error.message);
+      return;
+    } finally {
+      if (lessonController === controller) lessonController = null;
+    }
     const data = ensureAuthResponse(await res.json());
     if (requestId !== lessonRequestId) return;
     if (!data.ok || !data.lesson) {
@@ -265,7 +287,10 @@ function renderVocab() {
     const groupName = group > 0 && L.groups && L.groups[group - 1]
       ? L.groups[group - 1]
       : 'Chưa phân nhóm';
-    rows.push(`<tr class="vocab-group-row"><th colspan="8">${groupName}</th></tr>`);
+    const groupKey = String(group);
+    const collapsed = collapsedVocabGroups.has(groupKey);
+    rows.push(`<tr class="vocab-group-row"><th colspan="8"><button class="vocab-group-toggle" type="button" aria-expanded="${!collapsed}" onclick="toggleVocabGroup('${groupKey}')"><span class="vocab-group-icon">${collapsed ? '+' : '-'}</span>${groupName}<span class="vocab-group-count">${words.length} từ</span></button></th></tr>`);
+    if (collapsed) return;
     rows.push(...words.map(w => `
         <tr>
           <td><button class="btn learn-btn ${m[`${L.day}_${w.id}`] ? 'learned' : ''}" type="button" aria-pressed="${!!m[`${L.day}_${w.id}`]}" onclick="setLearned(${L.day}, ${w.id}, !${!!m[`${L.day}_${w.id}`]})">${m[`${L.day}_${w.id}`] ? 'Đã thuộc' : 'Chưa thuộc'}</button></td>
@@ -284,6 +309,12 @@ function renderVocab() {
   });
   document.getElementById('vocabBody').innerHTML = rows.join('');
   renderFlashcard();
+}
+
+function toggleVocabGroup(groupKey) {
+  if (collapsedVocabGroups.has(groupKey)) collapsedVocabGroups.delete(groupKey);
+  else collapsedVocabGroups.add(groupKey);
+  renderVocab();
 }
 
 function toggleFlashcard() {
@@ -489,12 +520,18 @@ function renderRecordingItem(record) {
   return item;
 }
 function renderContextRecordings() {
+  const recordingsByKey = new Map();
+  driveRecordings
+    .filter(r => r.day === LESSONS[currentDayIdx].day)
+    .forEach(recording => {
+      if (!recordingsByKey.has(recording.key)) recordingsByKey.set(recording.key, []);
+      recordingsByKey.get(recording.key).push(recording);
+    });
   document.querySelectorAll('.recording-slot').forEach(slot => {
     const key = slot.dataset.recordingKey;
     const list = slot.querySelector('.recording-list');
     list.innerHTML = '';
-    driveRecordings.filter(r => r.day === LESSONS[currentDayIdx].day && r.key === key)
-      .forEach(r => list.appendChild(renderRecordingItem(r)));
+    (recordingsByKey.get(key) || []).forEach(recording => list.appendChild(renderRecordingItem(recording)));
   });
 }
 function renderRecordings() {
