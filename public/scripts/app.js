@@ -38,13 +38,14 @@ function speakText(text) {
 function stopSpeech() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); }
 
 async function loadLessons() {
+  await authReady;
   const savedUrl = getGasUrl();
   const gasInput = document.getElementById('gasUrl');
   if (gasInput) gasInput.value = savedUrl;
   if (savedUrl) {
     try {
-      const res = await fetch(savedUrl + (savedUrl.includes('?') ? '&' : '?') + 'action=bootstrap');
-      const data = await res.json();
+      const res = await fetch(savedUrl + (savedUrl.includes('?') ? '&' : '?') + 'action=bootstrap&token=' + encodeURIComponent(getAuthToken()));
+      const data = ensureAuthResponse(await res.json());
       if (data && Array.isArray(data.days) && data.days.length > 0) {
         DAY_INDEX = data.days;
         LESSONS = [];
@@ -206,8 +207,8 @@ async function selectDay(idx) {
     document.getElementById('essayBox').innerHTML = '<div class="loading-state">Đang tải bài văn...</div>';
     const savedUrl = getGasUrl();
     const params = new URLSearchParams({ action: 'lesson', day: meta.day, folderName: meta.folderName || '' });
-    const res = await fetch(savedUrl + (savedUrl.includes('?') ? '&' : '?') + params.toString());
-    const data = await res.json();
+    const res = await fetch(savedUrl + (savedUrl.includes('?') ? '&' : '?') + params.toString() + '&token=' + encodeURIComponent(getAuthToken()));
+    const data = ensureAuthResponse(await res.json());
     if (requestId !== lessonRequestId) return;
     if (!data.ok || !data.lesson) {
       setGasStatus(data.error || 'Không tải được bài học.');
@@ -460,9 +461,9 @@ async function uploadToDrive(btn) {
       const base64 = reader.result.split(',')[1];
       const res = await fetch(gasUrl, {
         method: 'POST',
-        body: JSON.stringify({ action: 'uploadRecording', day: LESSONS[currentDayIdx].day, folderName: item._folder, recordingKey: item._key || 'general', recordingLabel: item._label || 'bản ghi chung', fileName: item._fname, mimeType: 'audio/webm', data: base64 })
+        body: JSON.stringify(authRequestBody({ action: 'uploadRecording', day: LESSONS[currentDayIdx].day, folderName: item._folder, recordingKey: item._key || 'general', recordingLabel: item._label || 'bản ghi chung', fileName: item._fname, mimeType: 'audio/webm', data: base64 }))
       });
-      const out = await res.json();
+      const out = ensureAuthResponse(await res.json());
       if (!out.ok) throw new Error(out.error || 'Upload thất bại.');
       msg.textContent = `Đã lưu vào ${item._folder} trên Drive!`;
       driveRecordings.push(out);
@@ -553,5 +554,5 @@ function downloadQuizReport() {
   a.click();
 }
 
-loadLessons();
+authReady.then(loadLessons);
 

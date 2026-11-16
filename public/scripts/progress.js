@@ -66,6 +66,7 @@ function renderStats() {
 }
 
 async function saveProgressToDrive() {
+  await authReady;
   const gasUrl = getGasUrl();
   if (!gasUrl) {
     setGasStatus('Hãy kết nối Google Drive để lưu tiến độ trên Drive.');
@@ -80,11 +81,13 @@ async function saveProgressToDrive() {
     const res = await fetch(gasUrl, {
       method: 'POST',
       body: JSON.stringify({
+        ...authRequestBody({
         action: 'saveProgress',
         progress: { words: learnedMap, lessons: buildLessonProgress() }
+        })
       })
     });
-    const out = await res.json();
+    const out = ensureAuthResponse(await res.json());
     if (!out.ok) throw new Error(out.error || 'Không thể lưu tiến độ.');
     setGasStatus('Tiến độ đã được lưu lên Google Drive.');
   } catch (e) {

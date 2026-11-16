@@ -41,10 +41,11 @@ function renderStats() {
 }
 
 async function loadData() {
+  await authReady;
   document.getElementById('gasUrl').value = getGasUrl();
   try {
-    const response = await fetch(getGasUrl() + (getGasUrl().includes('?') ? '&' : '?') + 'action=bootstrap');
-    const data = await response.json();
+    const response = await fetch(getGasUrl() + (getGasUrl().includes('?') ? '&' : '?') + 'action=bootstrap&token=' + encodeURIComponent(getAuthToken()));
+    const data = ensureAuthResponse(await response.json());
     if (!data || !Array.isArray(data.days)) throw new Error('Dữ liệu Drive không hợp lệ.');
     days = data.days;
     const progress = data.progress || {};

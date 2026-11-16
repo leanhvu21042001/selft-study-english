@@ -579,6 +579,65 @@ code {
   display: none;
 }
 
+#authOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(20, 33, 61, .72);
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  padding: 26px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(20, 33, 61, .3);
+}
+
+.auth-card h2 {
+  margin: 0 0 6px;
+}
+
+.auth-card label {
+  display: block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-card input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.auth-card .btn {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.auth-link {
+  display: block;
+  margin: 14px auto 0;
+  border: 0;
+  background: transparent;
+  color: var(--primary-dark);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.auth-message {
+  min-height: 20px;
+  margin-top: 13px;
+  font-size: 13px;
+}
+
 @media (max-width: 680px) {
   .wrap {
     padding: 14px 12px 48px;
