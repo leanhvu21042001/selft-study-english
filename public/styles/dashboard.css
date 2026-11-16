@@ -32,3 +32,5 @@
     .auth-link { display:block; margin:14px auto 0; border:0; background:transparent; color:var(--primary); cursor:pointer; font-size:12px; }
     .auth-message { min-height:20px; margin-top:13px; font-size:13px; }
     .err { color:#c2415d; font-weight:600; }
+    .nav .logout-btn { margin-left:auto; color:#fff; background:#d92d20; border-color:#b42318; }
+    .nav .logout-btn:hover { background:#b42318; }

@@ -11,6 +11,11 @@ function clearBrowserKeys() {
   sessionStorage.clear();
 }
 
+function logout() {
+  clearBrowserKeys();
+  window.location.reload();
+}
+
 function authUrl(action) {
   const url = getGasUrl();
   return url + (url.includes('?') ? '&' : '?') + 'action=' + encodeURIComponent(action);
@@ -58,12 +63,12 @@ async function login(event) {
     });
     const result = await response.json();
     if (!result.ok) {
-      clearBrowserKeys();
       showAuthMessage(result.error || 'Không thể đăng nhập.', true);
       return;
     }
     localStorage.setItem('eng_auth_token', result.token);
     localStorage.setItem('eng_auth_email', result.email);
+    localStorage.setItem('eng_auth_version', String(result.codeVersion || 1));
     currentUser = result;
     document.getElementById('authOverlay').remove();
     authReadyResolve(result);
@@ -130,7 +135,8 @@ async function resetCodeFromLink() {
       }
       showAuthMessage(result.message + ' Hãy đăng nhập bằng mã mới.', false);
       history.replaceState({}, document.title, window.location.pathname);
-      document.getElementById('newCodeForm').reset();
+      clearBrowserKeys();
+      window.location.reload();
     } catch (error) {
       showAuthMessage('Không cập nhật được mã khóa.', true);
     }
@@ -145,24 +151,47 @@ async function initializeAuth() {
     authOverlay();
     return;
   }
-  try {
-    const response = await fetch(authUrl('authStatus') + '&token=' + encodeURIComponent(token));
-    const result = await response.json();
-    if (!result.ok) throw new Error(result.error || 'AUTH_REQUIRED');
-    currentUser = result;
-    authReadyResolve(result);
-  } catch (error) {
-    clearBrowserKeys();
-    authOverlay();
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (getAuthToken() !== token) return;
+    try {
+      const response = await fetch(authUrl('authStatus')
+        + '&token=' + encodeURIComponent(token)
+        + '&email=' + encodeURIComponent(localStorage.getItem('eng_auth_email') || '')
+        + '&codeVersion=' + encodeURIComponent(localStorage.getItem('eng_auth_version') || '0'));
+      const result = await response.json();
+      if (result.ok) {
+        currentUser = result;
+        localStorage.setItem('eng_auth_version', String(result.codeVersion || 1));
+        authReadyResolve(result);
+        return;
+      }
+      if (result.authRequired && result.reason === 'CODE_CHANGED') {
+        clearBrowserKeys();
+        authOverlay();
+        showAuthMessage('Phiên học đã hết hạn hoặc mã khóa đã được cập nhật. Hãy đăng nhập lại.', true);
+        return;
+      }
+    } catch (error) {
+      if (getAuthToken() !== token) return;
+    }
+    await new Promise(resolve => setTimeout(resolve, 700 * (attempt + 1)));
+  }
+  if (getAuthToken() === token) {
+    currentUser = { email: localStorage.getItem('eng_auth_email') || '' };
+    authReadyResolve(currentUser);
   }
 }
 
 function authRequestBody(body) {
-  return Object.assign({}, body, { token: getAuthToken() });
+  return Object.assign({}, body, {
+    token: getAuthToken(),
+    email: localStorage.getItem('eng_auth_email') || '',
+    codeVersion: localStorage.getItem('eng_auth_version') || '0'
+  });
 }
 
 function ensureAuthResponse(result) {
-  if (result && result.authRequired) {
+  if (result && result.authRequired && result.reason === 'CODE_CHANGED') {
     clearBrowserKeys();
     window.location.reload();
     throw new Error('AUTH_REQUIRED');

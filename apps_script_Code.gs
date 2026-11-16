@@ -1,4 +1,4 @@
-// Desc: Learn English With Gemini - v003
+// Desc: Learn English With Gemini - v007
 // Dán mã này vào script.google.com rồi Deploy -> Web App (Execute as: Me, Who has access: Anyone)
 const ROOT_FOLDER_ID = '1zgWMKCy_xl893Il7rkRXyIC8YADUKx2q'; // Thư mục 'Hoc Tieng Anh 1 Nam'
 const MAX_USERS = 1000;
@@ -107,8 +107,16 @@ function appendUserLog(user, action, details) {
   if (user.logs.length > 2000) user.logs = user.logs.slice(-2000);
 }
 
-function authError(message) {
-  return jsonOutput({ ok: false, error: message, authRequired: message === 'AUTH_REQUIRED' });
+function authError(message, reason) {
+  return jsonOutput({ ok: false, error: message, authRequired: message === 'AUTH_REQUIRED', reason: reason || '' });
+}
+
+function authErrorForRequest(root, email, codeVersion, error) {
+  const user = readUser(root, email);
+  const reason = user && Number(codeVersion || 0) < Number(user.codeVersion || 1)
+    ? 'CODE_CHANGED'
+    : '';
+  return authError(error.message, reason);
 }
 
 function readLessons(root) {
@@ -302,14 +310,14 @@ function doGet(e) {
       const user = requireAuth(root, e.parameter.token);
       return jsonOutput({ ok: true, email: user.email, codeVersion: user.codeVersion });
     } catch (err) {
-      return authError(err.message);
+      return authErrorForRequest(root, e.parameter.email, e.parameter.codeVersion, err);
     }
   }
   let user;
   try {
     user = requireAuth(root, e.parameter.token);
   } catch (err) {
-    return authError(err.message);
+    return authErrorForRequest(root, e.parameter.email, e.parameter.codeVersion, err);
   }
   if (action === 'bootstrap') {
     return jsonOutput({
@@ -431,6 +439,13 @@ function doPost(e) {
       publicAccess: publicAccess
     });
   } catch (err) {
-    return jsonOutput({ ok: false, error: err.message, authRequired: err.message === 'AUTH_REQUIRED' });
+    if (err.message === 'AUTH_REQUIRED') {
+      const requestUser = body ? readUser(getRootFolder(), body.email) : null;
+      const reason = requestUser && Number(body.codeVersion || 0) < Number(requestUser.codeVersion || 1)
+        ? 'CODE_CHANGED'
+        : '';
+      return authError(err.message, reason);
+    }
+    return jsonOutput({ ok: false, error: err.message, authRequired: false });
   }
 }
